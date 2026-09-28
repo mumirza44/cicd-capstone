@@ -15,11 +15,11 @@
     "kubernetes-helm@latest",
     "kustomize@latest",
     "python312@latest",
-    "go@1.19",
     "poetry@latest",
     "namespace-cli@latest",
     "gnused@latest",
-    "nodejs_24@latest"
+    "nodejs_24@latest",
+    "go@1.23"
   ],
   "shell": {
     "init_hook": [
