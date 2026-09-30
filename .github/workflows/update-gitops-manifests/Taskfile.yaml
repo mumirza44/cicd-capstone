@@ -3,7 +3,9 @@ version: "3"
 # NOTES:
 #  - Because we use --no-skip-checkout + workflow_dispatch, you must commit your changes
 #    (it can be to a branch) in order for the checkout to work
-#  - Uses catthehacker/ubuntu:act-22.04 because node:16-buster-slim doesnt contain git, and 24.04 image is still beta (and failed)
+#  - Uses node:20-bookworm (non-slim, so it has git). catthehacker/ubuntu:act-22.04 fails here: node lives in
+#    /opt/acttoolcache/..., and when setup-bin adds to GITHUB_PATH act rebuilds PATH from its hardcoded default,
+#    dropping node, so the "Post Checkout Code" step fails with `exec: "node": executable file not found`
 
 tasks:
   trigger-workflow:
@@ -13,7 +15,7 @@ tasks:
         act workflow_dispatch \
           --container-architecture linux/amd64 \
           -e {{.PWD}}/event.json \
-          -P ubuntu-24.04=catthehacker/ubuntu:act-22.04 \
+          -P ubuntu-24.04=node:20-bookworm \
           --directory ../../.. \
           --no-skip-checkout \
           -W .github/workflows/update-gitops-manifests.yaml

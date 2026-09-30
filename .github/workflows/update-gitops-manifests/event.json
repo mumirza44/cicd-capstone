@@ -1,7 +1,7 @@
 {
   "inputs": {
     "service": "services/node/api-node",
-    "version": "foobarbaz",
-    "environment": "staging"
+    "version": "foobarbazbing",
+    "environment": "production"
   }
 }
